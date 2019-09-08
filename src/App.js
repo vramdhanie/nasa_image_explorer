@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import moment from 'moment';
 import Header from './header';
+import Card from './card';
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -41,25 +41,7 @@ const App = () => {
       .catch(error => setError(error.message));
   };
 
-  const imageCard =
-    currentImage > -1 ? (
-      <div className="card">
-        <img src={images[currentImage].href} alt={images[currentImage].title} />
-        <div className="card_content">
-          <h3>{images[currentImage].title}</h3>
-
-          <div className="card_description">
-            {images[currentImage].description}
-          </div>
-
-          <div className="card_date">
-            {moment(images[currentImage].date_created).format('DD MMMM YYYY')}
-          </div>
-        </div>
-      </div>
-    ) : (
-      ''
-    );
+  const imageCard = currentImage > -1 ? <Card image={images[cardImage]} /> : '';
 
   const controls =
     currentImage > -1 ? (
