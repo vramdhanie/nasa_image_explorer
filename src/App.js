@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import moment from 'moment';
+import Header from './header';
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -91,9 +92,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <header>
-        <h1>NASA Image Explorer</h1>
-      </header>
+      <Header />
       <div className="options">
         <h3>Select An option:</h3>
         <div className="options_form">
