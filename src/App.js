@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Header from './header';
 import Card from './card';
+import Options from './options';
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -21,7 +22,6 @@ const App = () => {
         throw new Error('Problems getting the data.');
       })
       .then(({ collection }) => {
-        console.log(collection);
         const {
           metadata: { total_hits: count },
           items
@@ -41,7 +41,8 @@ const App = () => {
       .catch(error => setError(error.message));
   };
 
-  const imageCard = currentImage > -1 ? <Card image={images[cardImage]} /> : '';
+  const imageCard =
+    currentImage > -1 ? <Card image={images[currentImage]} /> : '';
 
   const controls =
     currentImage > -1 ? (
@@ -65,29 +66,15 @@ const App = () => {
       ''
     );
 
-  const artifacts = ['planet', 'nebula', 'galaxy', 'pulsar'];
-  const options = artifacts.map((a, i) => (
-    <option value={a} key={i}>
-      {a}
-    </option>
-  ));
-
   return (
     <div className="App">
       <Header />
-      <div className="options">
-        <h3>Select An option:</h3>
-        <div className="options_form">
-          <select
-            value={image_type}
-            onChange={e => setImageType(e.target.value)}
-          >
-            {options}
-          </select>
-          <button onClick={fetchImages}> Search </button>
-          {error ? <div className="error">{error}</div> : ''}
-        </div>
-      </div>
+      <Options
+        onChange={imageType => setImageType(imageType)}
+        onClick={fetchImages}
+        error={error}
+        image_type={image_type}
+      />
       <div>{imageCard}</div>
       {controls}
     </div>
