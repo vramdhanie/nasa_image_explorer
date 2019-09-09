@@ -3,6 +3,7 @@ import './App.css';
 import Header from './header';
 import Card from './card';
 import Options from './options';
+import Controls from './controls';
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -46,22 +47,11 @@ const App = () => {
 
   const controls =
     currentImage > -1 ? (
-      <div className="controls">
-        <button
-          disabled={currentImage < 1}
-          onClick={e => setCurrentImage(currentImage - 1)}
-        >
-          &lt;
-        </button>
-        <div className="control_count">
-          Image {currentImage + 1} of {count}
-        </div>
-        {currentImage < count ? (
-          <button onClick={e => setCurrentImage(currentImage + 1)}>&gt;</button>
-        ) : (
-          ''
-        )}
-      </div>
+      <Controls
+        onClick={setCurrentImage}
+        currentImage={currentImage}
+        count={count}
+      />
     ) : (
       ''
     );
